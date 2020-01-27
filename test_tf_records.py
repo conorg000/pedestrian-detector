@@ -3,7 +3,7 @@ import tensorflow as tf
 from object_detection.utils import dataset_util
 
 """
-Usage: in command prompt python train_tf_records.py output_path='path to .record file'
+Usage: in command prompt python test_tf_records.py output_path='path to .record file'
 """
 
 flags = tf.app.flags
@@ -90,35 +90,35 @@ def main(_):
     writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
     # TODO(user): Write code to read in your dataset to examples variable
     # Paths for detection text files
-    train_det = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/train_det.txt"
-    #test_det = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test_det.txt"
+    #train_det = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/train_det.txt"
+    test_det = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test_det.txt"
 
-    # Get all training example names
-    with open(train_det, "r") as file:
+    # Get all test example names
+    with open(test_det, "r") as file:
       lines = file.readlines()
-    train_examples = [(line.split(','))[0] for line in lines]
-    #print(train_examples)
-    # Build training examples dictionary
-    train_dict = {}
-    for examp in train_examples:
-      train_dict[examp] = []
-    with open(train_det, "r") as file:
+    test_examples = [(line.split(','))[0] for line in lines]
+    #print(test_examples)
+    # Build testing examples dictionary
+    test_dict = {}
+    for examp in test_examples:
+      test_dict[examp] = []
+    with open(test_det, "r") as file:
       lines = file.readlines()
     # Clean each line then add to dict
     for line in lines:
         examp = (line.split(','))[0]
         clean = (line.split(','))[2:6]
-        (train_dict[examp]).append(clean)
+        (test_dict[examp]).append(clean)
 
-    train_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/train/"
-    #test_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test/"
+    #train_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/train/"
+    test_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test/"
 
-    for example in train_examples:
+    for example in test_examples:
         print("Example: ", example)
         # Get value for key example
-        data_list = train_dict[example]
+        data_list = test_dict[example]
         print("Data list: ", data_list)
-        tf_example = create_tf_example(example, train_path, data_list)
+        tf_example = create_tf_example(example, test_path, data_list)
         writer.write(tf_example.SerializeToString())
     writer.close()
 

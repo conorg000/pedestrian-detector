@@ -81,22 +81,38 @@ def create_tf_example(example, path, data_list):
 
 
 def main(_):
-  writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
-  # TODO(user): Write code to read in your dataset to examples variable
+    writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
+    # TODO(user): Write code to read in your dataset to examples variable
+    # Paths for detection text files
+    train_det = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/train_det.txt"
+    #test_det = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test_det.txt"
 
-  # TODO: Dict with filenames as key and list of lists as value
-  data_dict = {}
+    # Get all training example names
+    with open(train_det, "r") as file:
+      lines = file.readlines()
+    train_examples = [(line.split(','))[0] for line in lines]
+    #print(train_examples)
+    # Build training examples dictionary
+    train_dict = {}
+    for examp in train_examples:
+      train_dict[examp] = []
+    with open(train_det, "r") as file:
+      lines = file.readlines()
+    # Clean each line then add to dict
+    for line in lines:
+        examp = (line.split(','))[0]
+        clean = (line.split(','))[2:6]
+        (train_dict[examp]).append(clean)
 
-  train_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/train/"
-  test_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test/"
+    train_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/train/"
+    #test_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test/"
 
-  for example in examples:
-    # Get value for key example
-    data_list = data_dict[example]
-    tf_example = create_tf_example(example, train_path, data_list)
-    writer.write(tf_example.SerializeToString())
-
-  writer.close()
+    for example in train_examples:
+        # Get value for key example
+        data_list = train_dict[example]
+        tf_example = create_tf_example(example, train_path, data_list)
+        writer.write(tf_example.SerializeToString())
+    writer.close()
 
 
 if __name__ == '__main__':

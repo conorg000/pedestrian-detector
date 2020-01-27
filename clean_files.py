@@ -1,5 +1,6 @@
 from os import listdir, rename
 from os.path import isfile, join
+import shutil
 
 train_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/MOT16/train/"
 test_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/MOT16/test/"
@@ -85,4 +86,30 @@ def move(train_path, test_path, train_dirs, test_dirs, out_path):
     Output:
     Various folders/files in out_path
     """
-    
+    # Move train files and create train detection labels
+    with open(out_path + "train_det.txt", "w") as outfile:
+        for dir in train_dirs:
+            # Add detection labels to train_det.txt
+            with open("{}{}/det/det.txt".format(train_path, dir), "r") as infile:
+                for line in infile:
+                    outfile.write(line)
+            # Move all images
+            img_path = train_path + dir + "/img1/"
+            images = [f for f in listdir(img_path) if isfile(join(img_path, f))]
+            for image in images:
+                dest = shutil.copyfile((img_path + image) , (out_path + "train/" + image))
+
+    # Move test files and create test detection labels
+    with open(out_path + "test_det.txt", "w") as outfile:
+        for dir in test_dirs:
+            # Add detection labels to test_det.txt
+            with open("{}{}/det/det.txt".format(test_path, dir), "r") as infile:
+                for line in infile:
+                    outfile.write(line)
+            # Move all images
+            img_path = test_path + dir + "/img1/"
+            images = [f for f in listdir(img_path) if isfile(join(img_path, f))]
+            for image in images:
+                dest = shutil.copyfile((img_path + image) , (out_path + "test/" + image))
+
+move(train_path, test_path, train_dirs, test_dirs, out_path)

@@ -91,7 +91,7 @@ def main(_):
     # TODO(user): Write code to read in your dataset to examples variable
     # Paths for detection text files
     #train_det = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/train_det.txt"
-    test_det = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test_det.txt"
+    test_det = "/content/ped-detector/images/test_det.txt"
 
     # Get all test example names
     with open(test_det, "r") as file:
@@ -111,7 +111,7 @@ def main(_):
         (test_dict[examp]).append(clean)
 
     #train_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/train/"
-    test_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test/"
+    test_path = "/content/ped-detector/images/test/"
 
     for example in test_examples:
         print("Example: ", example)

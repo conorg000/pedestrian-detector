@@ -7,7 +7,7 @@ train_path = "/content/train/"
 test_path = "/content/test/"
 train_dirs = ["MOT16-02", "MOT16-05", "MOT16-09", "MOT16-10", "MOT16-11", "MOT16-13"]
 test_dirs = ["MOT16-01", "MOT16-06", "MOT16-07", "MOT16-08", "MOT16-12", "MOT16-14"]
-out_path = "/content/images/"
+out_path = "/content/ped-detector/images/"
 
 def clean(train_path, test_path, train_dirs, test_dirs):
     """

@@ -90,7 +90,7 @@ def main(_):
     writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
     # TODO(user): Write code to read in your dataset to examples variable
     # Paths for detection text files
-    train_det = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/train_det.txt"
+    train_det = "/content/ped-detector/images/train_det.txt"
     #test_det = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test_det.txt"
 
     # Get all training example names
@@ -110,7 +110,7 @@ def main(_):
         clean = (line.split(','))[2:6]
         (train_dict[examp]).append(clean)
 
-    train_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/train/"
+    train_path = "/content/ped-detector/images/train/"
     #test_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test/"
 
     for example in train_examples:

@@ -49,7 +49,7 @@ def create_tf_example(example, path, data_list):
   width = 1920 # Image width
   filename = (example + '.jpg').encode('utf8') # Filename of the image. Empty if image is not from file
   #encoded_image_data = None
-  img_path = path + example + '.jpg'
+  img_path = (path + example + '.jpg').encode('utf8')
   with tf.io.gfile.GFile(img_path, 'rb') as fid:
     encoded_jpg = fid.read() # Encoded image bytes
   image_format = b'jpeg' # b'jpeg' or b'png'

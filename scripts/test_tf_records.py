@@ -45,8 +45,8 @@ def mot16_to_tf(coordinates, width, height):
 
 def create_tf_example(example, path, data_list):
   # TODO(user): Populate the following variables from your example.
-  height = 1080 # Image height
-  width = 1920 # Image width
+  height = 337 # Image height
+  width = 600 # Image width
   filename = (example + '.jpg').encode('utf8') # Filename of the image. Empty if image is not from file
   #encoded_image_data = None
   img_path = (path + example + '.jpg').encode('utf-8')

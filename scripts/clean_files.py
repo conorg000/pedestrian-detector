@@ -1,6 +1,7 @@
 from os import listdir, rename
 from os.path import isfile, join
 import shutil
+from PIL import Image
 
 #PATH = '/content/'
 train_path = "/content/train/"
@@ -98,7 +99,10 @@ def move(train_path, test_path, train_dirs, test_dirs, out_path):
             img_path = train_path + dir + "/img1/"
             images = [f for f in listdir(img_path) if isfile(join(img_path, f))]
             for image in images:
-                dest = shutil.copyfile((img_path + image) , (out_path + "train/" + image))
+                image = Image.open((img_path + image))
+                image.thumbnail((600, 600))
+                image.save((out_path + "train/" + image))
+                #dest = shutil.copyfile((img_path + image) , (out_path + "train/" + image))
 
     # Move test files and create test detection labels
     with open(out_path + "test_det.txt", "w") as outfile:
@@ -111,6 +115,9 @@ def move(train_path, test_path, train_dirs, test_dirs, out_path):
             img_path = test_path + dir + "/img1/"
             images = [f for f in listdir(img_path) if isfile(join(img_path, f))]
             for image in images:
-                dest = shutil.copyfile((img_path + image) , (out_path + "test/" + image))
+                image = Image.open((img_path + image))
+                image.thumbnail((600, 600))
+                image.save((out_path + "test/" + image))
+                #dest = shutil.copyfile((img_path + image) , (out_path + "test/" + image))
 
 move(train_path, test_path, train_dirs, test_dirs, out_path)

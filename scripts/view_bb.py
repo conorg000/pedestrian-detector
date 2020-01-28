@@ -36,8 +36,8 @@ print("Example: ", example)
 # Get value for key example
 data_list = train_dict[example]
 print("Data list: ", data_list)
-height = 1080 # Image height
-width = 1920 # Image width
+height = 337 # Image height
+width = 600 # Image width
 filename = (example + '.jpg').encode('utf8') # Filename of the image. Empty if image is not from file
 img_path = (train_path + example + '.jpg').encode('utf8')
 image_format = b'jpeg' # b'jpeg' or b'png'

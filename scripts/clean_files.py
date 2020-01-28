@@ -45,7 +45,7 @@ def clean(train_path, test_path, train_dirs, test_dirs):
         # For each image in img1 subdirectory, rename images
         img_path = train_path + dir + "/img1/"
         images = [f for f in listdir(img_path) if isfile(join(img_path, f))]
-        print(images)
+        #print(images)
         for img in images:
             rename((img_path + img), (img_path + dir + "_" + img))
 
@@ -66,11 +66,11 @@ def clean(train_path, test_path, train_dirs, test_dirs):
         # For each image in img1 subdirectory, rename images
         img_path = test_path + dir + "/img1/"
         images = [f for f in listdir(img_path) if isfile(join(img_path, f))]
-        print(images)
+        #print(images)
         for img in images:
             rename((img_path + img), (img_path + dir + "_" + img))
 
-#clean(train_path, test_path, train_dirs, test_dirs)
+clean(train_path, test_path, train_dirs, test_dirs)
 
 def move(train_path, test_path, train_dirs, test_dirs, out_path):
     """

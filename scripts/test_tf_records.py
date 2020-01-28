@@ -49,14 +49,14 @@ def create_tf_example(example, path, data_list):
   width = 1920 # Image width
   filename = (example + '.jpg').encode('utf8') # Filename of the image. Empty if image is not from file
   #encoded_image_data = None
-  img_path = path + example + '.jpg'
+  img_path = (path + example + '.jpg').encode('utf-8')
   with tf.io.gfile.GFile(img_path, 'rb') as fid:
     encoded_jpg = fid.read() # Encoded image bytes
   image_format = b'jpeg' # b'jpeg' or b'png'
   # Coordinates is list of lists, each containing bounding box coordinates
   coordinates = data_list
   xmins, xmaxs, ymins, ymaxs = mot16_to_tf(coordinates, width, height)
-  print("Normalised BB coords: ", xmins, xmaxs, ymins, ymaxs)
+  #print("Normalised BB coords: ", xmins, xmaxs, ymins, ymaxs)
   #xmins = [] # List of normalized left x coordinates in bounding box (1 per box)
   #xmaxs = [] # List of normalized right x coordinates in bounding box
              # (1 per box)
@@ -65,9 +65,9 @@ def create_tf_example(example, path, data_list):
              # (1 per box)
 
   classes_text = [b'Pedestrian'] * (len(coordinates)) # List of string class name of bounding box (1 per box)
-  print("Classes: ", classes_text)
+  #print("Classes: ", classes_text)
   classes = [1] * (len(coordinates)) # List of integer class id of bounding box (1 per box)
-  print("Class ids: ", classes)
+  #print("Class ids: ", classes)
 
   tf_example = tf.train.Example(features=tf.train.Features(feature={
       'image/height': dataset_util.int64_feature(height),

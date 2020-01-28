@@ -39,7 +39,7 @@ def clean(train_path, test_path, train_dirs, test_dirs):
             line = dir + "_" + (zeros * "0") + line
             lines[i] = line
 
-        with open("{}/{}/det/det.txt".format(train_path, dir), "w+") as file:
+        with open("{}{}/det/det.txt".format(train_path, dir), "w+") as file:
             file.writelines(lines)
 
         # For each image in img1 subdirectory, rename images
@@ -60,7 +60,7 @@ def clean(train_path, test_path, train_dirs, test_dirs):
             line = dir + "_" + (zeros * "0") + line
             lines[i] = line
 
-        with open("{}/{}/det/det.txt".format(test_path, dir), "w+") as file:
+        with open("{}{}/det/det.txt".format(test_path, dir), "w+") as file:
             file.writelines(lines)
 
         # For each image in img1 subdirectory, rename images

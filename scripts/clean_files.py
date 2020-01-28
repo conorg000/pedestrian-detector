@@ -99,9 +99,9 @@ def move(train_path, test_path, train_dirs, test_dirs, out_path):
             img_path = train_path + dir + "/img1/"
             images = [f for f in listdir(img_path) if isfile(join(img_path, f))]
             for image in images:
-                image = Image.open((img_path + image))
-                image.thumbnail((600, 600))
-                image.save((out_path + "train/" + image))
+                img = Image.open((img_path + image))
+                img.thumbnail((600, 600))
+                img.save((out_path + "train/" + image))
                 #dest = shutil.copyfile((img_path + image) , (out_path + "train/" + image))
 
     # Move test files and create test detection labels
@@ -115,9 +115,9 @@ def move(train_path, test_path, train_dirs, test_dirs, out_path):
             img_path = test_path + dir + "/img1/"
             images = [f for f in listdir(img_path) if isfile(join(img_path, f))]
             for image in images:
-                image = Image.open((img_path + image))
-                image.thumbnail((600, 600))
-                image.save((out_path + "test/" + image))
+                img = Image.open((img_path + image))
+                img.thumbnail((600, 600))
+                img.save((out_path + "test/" + image))
                 #dest = shutil.copyfile((img_path + image) , (out_path + "test/" + image))
 
 move(train_path, test_path, train_dirs, test_dirs, out_path)

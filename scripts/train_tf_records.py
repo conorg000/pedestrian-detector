@@ -3,14 +3,15 @@ import tensorflow as tf
 from object_detection.utils import dataset_util
 
 """
-Usage: in command prompt python train_tf_records.py output_path='path to .record file'
+Usage: in command prompt $python train_tf_records.py --output_path='path to .record file'
 """
 
 flags = tf.app.flags
 flags.DEFINE_string('output_path', '', 'Path to output TFRecord')
 FLAGS = flags.FLAGS
+PATH = 'C:/Users/Conor/Documents/Uni/2019tri3/img/ped-detector/'
 
-def mot16_to_tf(coordinates, width, height):
+def mot16_to_tf(coordinates):
     """
     Converts MOT16 bounding box coordinates into TF_Record-friendly data
 
@@ -31,10 +32,10 @@ def mot16_to_tf(coordinates, width, height):
     ymins = []
     ymaxs = []
     for box in coordinates:
-        xmin = float(box[0]) / width
-        xmax = (float(box[0]) + float(box[2])) / width
-        ymin = float(box[1]) / height
-        ymax = (float(box[1]) + float(box[3])) / height
+        xmin = float(box[0])
+        xmax = (float(box[0]) + float(box[2]))
+        ymin = float(box[1])
+        ymax = (float(box[1]) + float(box[3]))
         xmins.append(xmin)
         xmaxs.append(xmax)
         ymins.append(ymin)
@@ -58,7 +59,7 @@ def create_tf_example(example, path, data_list):
   image_format = b'jpeg' # b'jpeg' or b'png'
   # Coordinates is list of lists, each containing bounding box coordinates
   coordinates = data_list
-  xmins, xmaxs, ymins, ymaxs = mot16_to_tf(coordinates, width, height)
+  xmins, xmaxs, ymins, ymaxs = mot16_to_tf(coordinates)
   #print("Normalised BB coords: ", xmins, xmaxs, ymins, ymaxs)
   #xmins = [] # List of normalized left x coordinates in bounding box (1 per box)
   #xmaxs = [] # List of normalized right x coordinates in bounding box
@@ -88,14 +89,12 @@ def create_tf_example(example, path, data_list):
   }))
   return tf_example
 
-
 def main(_):
     writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
     # TODO(user): Write code to read in your dataset to examples variable
     # Paths for detection text files
-    train_det = "/content/ped-detector/images/train_det.txt"
+    train_det = PATH + "images/train_det.txt"
     #test_det = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test_det.txt"
-
     # Get all training example names
     with open(train_det, "r") as file:
       lines = file.readlines()
@@ -110,10 +109,10 @@ def main(_):
     # Clean each line then add to dict
     for line in lines:
         examp = (line.split(','))[0]
-        clean = (line.split(','))[2:6]
+        clean = (line.split(','))[1:]
         (train_dict[examp]).append(clean)
 
-    train_path = "/content/ped-detector/images/train/"
+    train_path = PATH + "images/train/"
     #test_path = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test/"
 
     for example in train_examples:

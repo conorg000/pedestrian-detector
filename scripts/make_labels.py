@@ -34,48 +34,6 @@ def clean(train_path, test_path, train_dirs, test_dirs, out_path):
 
     # Start with training directory
     # For each subdirectory in directory, add subdirectory name to line
-    """
-    for dir in train_dirs:
-        with open("{}{}/det/det.txt".format(train_path, dir), "r") as file:
-            lines = file.readlines()
-        newlines = []
-        for i, line in enumerate(lines):
-            # Rename image name
-            first = (line.split(",")[0])
-            zeros = (6 - len(first))
-            # Adjust coordinates for smaller images
-            coords = line.split(',')[2:6]
-            coords[0] = float(coords[0])/1920*600
-            coords[1] = float(coords[1])/1080*337
-            coords[2] = float(coords[2])/1920*600
-            coords[3] = float(coords[3])/1080*337
-            new_line = "{}_{}{},{},{},{},{}".format(dir,(zeros*"0"),first,coords[0],coords[1],coords[2],coords[3])
-            lines[i] = new_line + '\n'
-
-        with open("{}{}/det/det.txt".format(train_path, dir), "w+") as file:
-            file.writelines(lines)
-
-    # Same with test directory
-    for dir in test_dirs:
-        with open("{}{}/det/det.txt".format(test_path, dir), "r") as file:
-            lines = file.readlines()
-        newlines = []
-        for i, line in enumerate(lines):
-            # Rename image name
-            first = (line.split(",")[0])
-            zeros = (6 - len(first))
-            # Adjust coordinates for smaller images
-            coords = line.split(',')[2:6]
-            coords[0] = float(coords[0])/1920*600
-            coords[1] = float(coords[1])/1080*337
-            coords[2] = float(coords[2])/1920*600
-            coords[3] = float(coords[3])/1080*337
-            new_line = "{}_{}{},{},{},{},{}".format(dir,(zeros*"0"),first,coords[0],coords[1],coords[2],coords[3])
-            lines[i] = new_line '\n'
-
-        with open("{}{}/det/det.txt".format(test_path, dir), "w+") as file:
-            file.writelines(lines)
-    """
     # Move train files and create train detection labels
     with open(out_path + "train_det.txt", "w") as outfile:
         for dir in train_dirs:
@@ -95,14 +53,6 @@ def clean(train_path, test_path, train_dirs, test_dirs, out_path):
                 new_line = "{}_{}{},{},{},{},{}".format(dir,(zeros*"0"),first,coords[0],coords[1],coords[2],coords[3])
                 #lines[i] = new_line + '\n'
                 outfile.write(new_line + '\n')
-            """
-            outfile.write(lines)
-                with open("{}{}/det/det.txt".format(train_path, dir), "w+") as file:
-                    file.writelines(lines)
-            with open("{}{}/det/det.txt".format(train_path, dir), "r") as infile:
-                for line in infile:
-                    outfile.write(line)
-            """
 
     # Move test files and create test detection labels
     with open(out_path + "test_det.txt", "w") as outfile:
@@ -122,11 +72,5 @@ def clean(train_path, test_path, train_dirs, test_dirs, out_path):
                 new_line = "{}_{}{},{},{},{},{}".format(dir,(zeros*"0"),first,coords[0],coords[1],coords[2],coords[3])
                 #lines[i] = new_line + '\n'
                 outfile.write(new_line + '\n')
-            # Add detection labels to test_det.txt
-            """
-            with open("{}{}/det/det.txt".format(test_path, dir), "r") as infile:
-                for line in infile:
-                    outfile.write(line)
-            """
 
 clean(train_path, test_path, train_dirs, test_dirs, out_path)

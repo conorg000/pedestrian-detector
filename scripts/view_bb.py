@@ -6,7 +6,7 @@ from IPython.display import display
 %matplotlib inline
 
 # Change this to the index of training example to viz
-EXAMPLE = 500
+EXAMPLE = 0
 
 train_det = "/content/ped-detector/images/train_det.txt"
 #test_det = "C:/Users/Conor/Documents/Uni/2019tri3/img/final_proj/data/test_det.txt"
@@ -15,7 +15,6 @@ train_det = "/content/ped-detector/images/train_det.txt"
 with open(train_det, "r") as file:
   lines = file.readlines()
 train_examples = [(line.split(','))[0] for line in lines]
-train_examples = list(set(train_examples))
 #print(train_examples[0])
 # Build training examples dictionary
 train_dict = {}

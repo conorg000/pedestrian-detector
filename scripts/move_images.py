@@ -39,7 +39,7 @@ def move(train_path, test_path, train_dirs, test_dirs, out_path):
             print('Saved ', image)
 
         for img in images:
-            rename((img_path + img), (img_path + dir + "_" + img))
+            rename((img_path + img), (out_path + 'train/' + dir + "_" + img))
 
     # Move all images
     for dir in test_dirs:
@@ -52,6 +52,6 @@ def move(train_path, test_path, train_dirs, test_dirs, out_path):
             print('Saved ', image)
 
         for img in images:
-            rename((img_path + img), (img_path + dir + "_" + img))
+            rename((img_path + img), (out_path + 'test/' + dir + "_" + img))
 
 move(train_path, test_path, train_dirs, test_dirs, out_path)

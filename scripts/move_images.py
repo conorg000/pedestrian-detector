@@ -36,7 +36,10 @@ def move(train_path, test_path, train_dirs, test_dirs, out_path):
             img = Image.open((img_path + image))
             img.thumbnail((600, 600))
             img.save((img_path + image))
-            #dest = shutil.copyfile((img_path + image) , (out_path + "train/" + image))
+            print('Saved ', image)
+
+        for img in images:
+            rename((img_path + img), (img_path + dir + "_" + img))
 
     # Move all images
     for dir in test_dirs:
@@ -46,6 +49,9 @@ def move(train_path, test_path, train_dirs, test_dirs, out_path):
             img = Image.open((img_path + image))
             img.thumbnail((600, 600))
             img.save((img_path + image))
-            #dest = shutil.copyfile((img_path + image) , (out_path + "test/" + image))
+            print('Saved ', image)
+
+        for img in images:
+            rename((img_path + img), (img_path + dir + "_" + img))
 
 move(train_path, test_path, train_dirs, test_dirs, out_path)

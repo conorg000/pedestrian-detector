@@ -32,10 +32,10 @@ def mot16_to_tf(coordinates):
     ymins = []
     ymaxs = []
     for box in coordinates:
-        xmin = float(box[0])
-        xmax = (float(box[0]) + float(box[2]))
-        ymin = float(box[1])
-        ymax = (float(box[1]) + float(box[3]))
+        xmin = float(box[0]) / 600
+        xmax = (float(box[0]) + float(box[2]))/600
+        ymin = float(box[1])/337
+        ymax = (float(box[1]) + float(box[3]))/337
         xmins.append(xmin)
         xmaxs.append(xmax)
         ymins.append(ymin)
@@ -113,10 +113,10 @@ def main(_):
     test_path = PATH + "images/test/"
 
     for example in test_examples:
-        print("Example: ", example)
+        #print("Example: ", example)
         # Get value for key example
         data_list = test_dict[example]
-        print("Data list: ", data_list)
+        #print("Data list: ", data_list)
         tf_example = create_tf_example(example, test_path, data_list)
         writer.write(tf_example.SerializeToString())
     writer.close()

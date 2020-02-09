@@ -6,12 +6,12 @@ from PIL import Image
 #PATH = '/content/'
 # Change to absolute path
 PATH = 'C:/Users/Conor/Documents/Uni/2019tri3/img/ped-detector/'
-train_path = PATH + 'images/train/'
-test_path = PATH + 'images/test/'
+train_path = 'C:/Users/Conor/Documents/Uni/2019tri3/img/MOT16/train/'
+test_path = 'C:/Users/Conor/Documents/Uni/2019tri3/img/MOT16/test/'
 # Don't use MOT16-05 (odd image size)
-train_dirs = ["MOT16-02", "MOT16-04", "MOT16-09", "MOT16-10", "MOT16-11", "MOT16-13"]
+train_dirs = ["MOT16-02", "MOT16-04", "MOT16-09"]
 # Don't use MOT16-06 (odd image size)
-test_dirs = ["MOT16-01","MOT16-03", "MOT16-07", "MOT16-08", "MOT16-12", "MOT16-14"]
+test_dirs = ["MOT16-01"]
 out_path = PATH + "images/"
 
 def clean(train_path, test_path, train_dirs, test_dirs, out_path):

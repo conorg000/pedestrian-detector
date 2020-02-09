@@ -1,0 +1,9 @@
+Pedestrian 261 143 275 186
+Pedestrian 380 134 407 214
+Pedestrian 169 142 182 181
+Pedestrian 509 139 535 219
+Pedestrian 244 143 258 186
+Pedestrian 228 152 235 175
+Pedestrian 256 138 276 198
+Pedestrian 505 95 548 226
+Pedestrian 239 130 259 190

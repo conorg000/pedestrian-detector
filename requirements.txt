@@ -4,3 +4,7 @@ lxml
 jupyter
 matplotlib
 opencv-python
+numpy
+tarfile
+zipfile
+PIL

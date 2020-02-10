@@ -28,7 +28,7 @@ def prep_gt(input_file):
     # Look at first 17 lines (confidence scores)
     # Get confidence scores
     scores = []
-    print(input_file)
+    #print(input_file)
     for i, line in enumerate(lines[:17]):
         line = line.translate(str.maketrans('', '', '[]'))
         tokens = line.split()
@@ -37,17 +37,16 @@ def prep_gt(input_file):
         new = [float(x) for x in tokens]
         new = list(filter((lambda x: x > 0.3), new))
         if len(new) != 0:
-            print(new)
+            #print(new)
             scores += new
         #scores += new
     #print('Scores: ')
     #print(scores)
-    # TF returns boxes in format [ymin, xmin, ymax, xmax]
     # Get detection boxes
     # Un-normalise
-    """
+    # Starting at line 17, going len(scores) up from there
     boxes = []
-    for n, line in enumerate(lines[17:]):
+    for n, line in enumerate(lines[17:(17+len(scores))]):
         # Rearrange to xmin ymin xmax ymax
         # x * 600
         # y * 337
@@ -55,7 +54,8 @@ def prep_gt(input_file):
         #print(line)
         tokens = line.split()
         #print(tokens)
-        new = list(filter((lambda x: x != '0.'), tokens))
+        #new = list(filter((lambda x: x != '0.'), tokens))
+        new = [float(x) for x in tokens]
         if len(new) != 0:
             # [ymin, xmin, ymax, xmax] --> [xmin ymin xmax ymax]
             box = [0, 0, 0, 0]
@@ -78,7 +78,6 @@ def prep_gt(input_file):
         for thing in res:
             imgtxt.write('Pedestrian ' + '{} {} {} {} {}\n'.format(thing[0], thing[1][0],
              thing[1][1], thing[1][2], thing[1][3]))
-    """
     return True
 
 img_path = olddt_dir

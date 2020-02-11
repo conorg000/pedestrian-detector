@@ -81,7 +81,9 @@ Using the function in [`model_inference.ipynb`](https://github.com/conorg000/ped
 The Tensorflow model spits out results which don't work with the MOT test set or our evaluation script, so we have to clean them up. Basically, Tensorflow's bounding boxes are of the format `[ymin, xmin, ymax, xmax]`, but we want `[xmin, ymin, xmax, ymax]`. Tensorflow's results are also 'relative' coordinates (relative to image size),  whereas we want 'absolute coordinates'.
 
 [`prep_dt_finetuned.py`](https://github.com/conorg000/ped-detector/blob/master/scripts/prep_dt_finetuned.py) cleans up the **fine-tuned model** detections. The results end up in `ped-detector/evaluation/ft_detections`.
+
 [`prep_dt.py`](https://github.com/conorg000/ped-detector/blob/master/scripts/prep_dt.py) cleans up the **pre-trained model** detections. The results end up in `ped-detector/evaluation/pt_detections`.
+
 [`prep_gt.py`](https://github.com/conorg000/ped-detector/blob/master/scripts/prep_gt.py) cleans up the MOT16 groundtruth detections (`test_det.txt`). The results end up `ped-detector/evaluation/groundtruths`.
 
 For evaluation we use Rafael Padilla's easy-to-use [Object Detection Metrics](https://github.com/rafaelpadilla/Object-Detection-Metrics#how-to-use-this-project) repo. It's based off PASCAL VOC Challenge metrics and uses mean accuracy precision (mAP) to measure performance. It is very easy to use:
